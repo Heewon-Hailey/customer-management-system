@@ -1,6 +1,29 @@
+// examples : https://material-ui.com/demos/tables/ 
+
 import React, { Component } from 'react';
 import './App.css';
 import Customer from './components/Customer';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import { withStyles } from '@material-ui/styles'; // to use CSS
+
+const styles = theme => ({
+  root: {        //style for root
+    width: '100%',
+    marginTop: theme.spacing.unit *3,
+    overflowX: "auto"
+  },
+
+  table :{
+     minWidth: 1080  //fixed min width, when the window size is smaller, scrollbar will be shown
+  }
+
+})
+
 
 const customers = [
   {
@@ -30,9 +53,23 @@ const customers = [
 ]
 class App extends Component {
   render(){
+    const { classes } = this.props;
     return (
-      <div>
-        { customers.map(c => {
+      <Paper className = {classes.root} > 
+          <Table className = {classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell> No. </TableCell>
+                <TableCell>Image</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>DOB</TableCell>
+                <TableCell>Gender</TableCell>
+                <TableCell>Job</TableCell>
+              </TableRow>
+            </TableHead>
+          
+            <TableBody>
+          {customers.map(c => {
             return (
             <Customer
               key = {c.id}    // in map, put unique 'key' props to identify element
@@ -43,11 +80,15 @@ class App extends Component {
               gender = {c.gender}
               job = {c.job}
               />
-            )})}
-      </div>
+            )})
+          }
+          </TableBody>
+          </Table>
+      </Paper>
     );
   }
 
 }
 
-export default App;
+export default withStyles(styles)(App);
+//export App with the styles 
