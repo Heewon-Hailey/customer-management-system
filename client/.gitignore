@@ -2,12 +2,6 @@
 
 # push only necessary files to save space
 
-#upload
-/upload
-
-# database 
-/database.json 
-
 # dependencies
 /node_modules
 /.pnp
